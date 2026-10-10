@@ -11,10 +11,10 @@ dns.setServers([
     '1.1.1.1'
 ]);
 
+const express = require('express');
 const path = require('path');
 
 // 1. Serve static files from Frontend build output
-// Note: If using Vite, output folder is 'dist'. If using Create React App, use 'build'.
 app.use(express.static(path.join(__dirname, '../Frontend/dist')));
 
 // 2. Fallback to index.html for React SPA client-side routing
@@ -24,9 +24,7 @@ app.get('*', (req, res) => {
 
 connectDB();
 
-// Test: generate interview report and print JSON output
-
-
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
