@@ -11,6 +11,17 @@ dns.setServers([
     '1.1.1.1'
 ]);
 
+const path = require('path');
+
+// 1. Serve static files from Frontend build output
+// Note: If using Vite, output folder is 'dist'. If using Create React App, use 'build'.
+app.use(express.static(path.join(__dirname, '../Frontend/dist')));
+
+// 2. Fallback to index.html for React SPA client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Frontend/dist/index.html'));
+});
+
 connectDB();
 
 // Test: generate interview report and print JSON output
