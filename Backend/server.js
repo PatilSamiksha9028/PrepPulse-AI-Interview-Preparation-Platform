@@ -18,7 +18,7 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, '../Frontend/dist')));
 
 // 2. Fallback to index.html for React SPA client-side routing
-app.get('*', (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, '../Frontend/dist/index.html'));
 });
 
